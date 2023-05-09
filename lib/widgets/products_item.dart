@@ -1,6 +1,7 @@
 // ignore_for_file: sort_child_properties_last, prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import '../screens/product_details.dart';
 
 class ProductItem extends StatelessWidget {
   final String ProductTitle;
@@ -21,9 +22,17 @@ class ProductItem extends StatelessWidget {
         topRight: Radius.circular(8),
       ),
       child: GridTile(
-        child: Image.network(
-          ProductImageUrl,
-          fit: BoxFit.cover,
+        child: GestureDetector(
+          onTap: () {
+            Navigator.of(context).pushNamed(
+              ProductDetails.routeName,
+              arguments: ProductId,
+            );
+          },
+          child: Image.network(
+            ProductImageUrl,
+            fit: BoxFit.cover,
+          ),
         ),
         footer: GridTileBar(
           backgroundColor: Colors.black87,
