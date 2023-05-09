@@ -5,13 +5,11 @@ import 'package:flutter/material.dart';
 class ProductItem extends StatelessWidget {
   final String ProductTitle;
   final String ProductImageUrl;
-  final int ProductPrice;
   final String ProductId;
 
   ProductItem(
     this.ProductTitle,
     this.ProductImageUrl,
-    this.ProductPrice,
     this.ProductId,
   );
 

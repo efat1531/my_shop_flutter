@@ -56,7 +56,6 @@ class ProductOverviewScreen extends StatelessWidget {
         itemBuilder: ((context, index) => ProductItem(
               loadedProducts[index].title,
               loadedProducts[index].imageUrl,
-              loadedProducts[index].price,
               loadedProducts[index].id,
             )),
         itemCount: loadedProducts.length,
