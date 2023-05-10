@@ -1,7 +1,10 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, sort_child_properties_last
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../widgets/badge.dart';
 import '../widgets/product_grid_view.dart';
+import '../provider/cart_provider.dart';
 
 enum FilterOptions {
   Favourites,
@@ -21,6 +24,21 @@ class _ProductOverviewScreenState extends State<ProductOverviewScreen> {
       appBar: AppBar(
         title: Text('My Shop'),
         actions: [
+          Consumer<Cart>(
+            builder: (context, cart, ch) => Badge(
+              child: ch!,
+              color: Theme.of(context).accentColor,
+              value: cart.itemSize.toString(),
+            ),
+            child: IconButton(
+              onPressed: () {
+                print('I am fine now');
+              },
+              icon: Icon(
+                Icons.shopping_cart_outlined,
+              ),
+            ),
+          ),
           PopupMenuButton(
             icon: Icon(Icons.more_vert),
             onSelected: (FilterOptions value) {

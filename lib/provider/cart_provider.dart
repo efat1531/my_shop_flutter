@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_final_fields
+
 import 'package:flutter/widgets.dart';
 
 class CartItem {
@@ -14,13 +16,17 @@ class CartItem {
 }
 
 class Cart with ChangeNotifier {
-  late Map<String, CartItem> _items;
+  Map<String, CartItem> _items = {};
   Map<String, CartItem> get items {
     return {..._items};
   }
 
-  void addItem(String Productid, int Price, String Title) {
-    if (items.containsKey(Productid)) {
+  void addItem(
+    String Productid,
+    int Price,
+    String Title,
+  ) {
+    if (_items.containsKey(Productid)) {
       _items.update(
         Productid,
         (value) => CartItem(
@@ -30,7 +36,7 @@ class Cart with ChangeNotifier {
             quantity: value.quantity + 1),
       );
     } else {
-      items.putIfAbsent(
+      _items.putIfAbsent(
         Productid,
         () => CartItem(
             id: DateTime.now().toString(),
@@ -38,6 +44,13 @@ class Cart with ChangeNotifier {
             title: Title,
             quantity: 1),
       );
+      print(Productid);
     }
+    print(_items.length);
+    notifyListeners();
+  }
+
+  int get itemSize {
+    return _items.length;
   }
 }
