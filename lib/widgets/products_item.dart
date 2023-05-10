@@ -8,7 +8,7 @@ import '../screens/product_details.dart';
 class ProductItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final ProductReceived = Provider.of<Product>(context);
+    final ProductReceived = Provider.of<Product>(context,listen: false);
     return ClipRRect(
       borderRadius: BorderRadius.only(
         topLeft: Radius.circular(8),
@@ -31,10 +31,12 @@ class ProductItem extends StatelessWidget {
           backgroundColor: Colors.black87,
           leading: IconButton(
             color: Theme.of(context).accentColor,
-            icon: Icon(
-              ProductReceived.isFavourite
-                  ? Icons.favorite
-                  : Icons.favorite_border_outlined,
+            icon: Consumer<Product>(
+              builder: (context, value, _) => Icon(
+                ProductReceived.isFavourite
+                    ? Icons.favorite
+                    : Icons.favorite_border_outlined,
+              ),
             ),
             onPressed: () => ProductReceived.isFavouriteToggle(),
           ),
