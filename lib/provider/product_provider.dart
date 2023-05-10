@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_final_fields
 
 import 'package:flutter/widgets.dart';
-import '../models/Product.dart';
+import './Product_model_provider.dart';
 
 class ProductProvider with ChangeNotifier {
   List<Product> _items = [
