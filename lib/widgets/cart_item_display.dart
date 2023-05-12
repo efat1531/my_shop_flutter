@@ -24,7 +24,7 @@ class CartItemDisplay extends StatelessWidget {
       child: Dismissible(
         key: ValueKey(ItemId),
         onDismissed: (direction) {
-          Provider.of<Cart>(context).removeItem(ProductId);
+          Provider.of<Cart>(context,listen: false).removeItem(ProductId);
         },
         background: Container(
           decoration: const BoxDecoration(
