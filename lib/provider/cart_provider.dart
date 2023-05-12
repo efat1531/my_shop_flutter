@@ -66,4 +66,10 @@ class Cart with ChangeNotifier {
     _items.remove(ProductId);
     notifyListeners();
   }
+
+  void delteCart() {
+    _items = {};
+    //print('Order Deleted');
+    notifyListeners();
+  }
 }
