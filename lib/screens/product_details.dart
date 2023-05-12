@@ -17,6 +17,7 @@ class ProductDetails extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
               padding: const EdgeInsets.symmetric(
@@ -29,13 +30,52 @@ class ProductDetails extends StatelessWidget {
                   Image.network(loadedProduct.imageUrl, fit: BoxFit.fitHeight),
             ),
             const SizedBox(
-              height: 20,
+              height: 8,
             ),
             Container(
-              margin:const EdgeInsets.all(10),
-              padding:const EdgeInsets.symmetric(vertical: 4.0, horizontal: 5.0),
+              padding:
+                  const EdgeInsets.symmetric(vertical: 4.0, horizontal: 5.0),
+              width: double.infinity,
               child: Text(
                 'Price: ${loadedProduct.price} TK',
+                style: TextStyle(
+                  color: Colors.grey[800],
+                  fontSize: 18,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            const SizedBox(
+              height: 8,
+            ),
+            const Padding(
+              padding: EdgeInsets.symmetric(
+                vertical: 5.0,
+                horizontal: 10.0,
+              ),
+              child: Text(
+                'Description:',
+                //textAlign: TextAlign.left,
+                style: TextStyle(
+                  color: Colors.black87,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                ),
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 10,
+                vertical: 4,
+              ),
+              width: double.infinity,
+              child: Text(
+                loadedProduct.description,
+                softWrap: true,
+                style: const TextStyle(
+                  fontSize: 15,
+                  color: Colors.black,
+                ),
               ),
             ),
           ],
