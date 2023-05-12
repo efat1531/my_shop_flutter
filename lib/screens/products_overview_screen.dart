@@ -28,7 +28,7 @@ class _ProductOverviewScreenState extends State<ProductOverviewScreen> {
           Consumer<Cart>(
             builder: (context, cart, ch) => Badge(
               child: ch!,
-              color: Theme.of(context).accentColor,
+              color: Color.fromRGBO(255, 114, 67, 1),
               value: cart.itemCount.toString(),
             ),
             child: IconButton(

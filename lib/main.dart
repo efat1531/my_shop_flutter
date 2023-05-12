@@ -24,9 +24,10 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'MyShop',
         theme: ThemeData(
-          primarySwatch: Colors.blue,
-          accentColor: Color.fromRGBO(251, 133, 0, 1),
           fontFamily: 'Lato',
+          appBarTheme: const AppBarTheme(
+            backgroundColor: Color.fromRGBO(92, 7, 253, 1.0),
+          ),
         ),
         home: ProductOverviewScreen(),
         routes: {

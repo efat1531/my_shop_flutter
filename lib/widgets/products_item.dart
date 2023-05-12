@@ -1,5 +1,6 @@
 // ignore_for_file: sort_child_properties_last, prefer_const_constructors, non_constant_identifier_names
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../provider/Product_model_provider.dart';
@@ -10,7 +11,7 @@ class ProductItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ProductReceived = Provider.of<Product>(context, listen: false);
-    final cart = Provider.of<Cart>(context,listen: false);
+    final cart = Provider.of<Cart>(context, listen: false);
     return ClipRRect(
       borderRadius: BorderRadius.only(
         topLeft: Radius.circular(8),
@@ -32,7 +33,7 @@ class ProductItem extends StatelessWidget {
         footer: GridTileBar(
           backgroundColor: Colors.black87,
           leading: IconButton(
-            color: Theme.of(context).accentColor,
+            color: Color.fromRGBO(255, 190, 57, 1),
             icon: Consumer<Product>(
               builder: (context, value, _) => Icon(
                 ProductReceived.isFavourite
