@@ -48,7 +48,7 @@ class ProductItem extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
           trailing: IconButton(
-            color: Theme.of(context).accentColor,
+            color: Color.fromRGBO(255, 190, 57, 1),
             icon: Icon(Icons.shopping_cart),
             onPressed: () {
               cart.addItem(

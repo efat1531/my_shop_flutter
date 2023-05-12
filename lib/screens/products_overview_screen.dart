@@ -23,7 +23,7 @@ class _ProductOverviewScreenState extends State<ProductOverviewScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('My Shop'),
+        title: _showFavourites?Text('Your Favourites'):Text('All Items'),
         actions: [
           Consumer<Cart>(
             builder: (context, cart, ch) => Badge(

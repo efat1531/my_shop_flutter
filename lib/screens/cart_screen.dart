@@ -16,6 +16,7 @@ class CartScreen extends StatelessWidget {
         children: [
           Card(
             elevation: 6,
+            color:const Color.fromRGBO(251, 234, 255, 1),
             margin: const EdgeInsets.all(15),
             child: Padding(
               padding: const EdgeInsets.all(8),
@@ -40,9 +41,13 @@ class CartScreen extends StatelessWidget {
                           fontSize: 17,
                         ),
                       ),
-                      backgroundColor: const Color.fromRGBO(33, 158, 188, 1),
+                      backgroundColor: const Color.fromRGBO(255, 0, 116, 1),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(6),
+                        side: const BorderSide(
+                          color: Colors.black45,
+                          width: 1.5,
+                        ),
                       ),
                     ),
                   ),
@@ -53,7 +58,7 @@ class CartScreen extends StatelessWidget {
                         RoundedRectangleBorder(
                           side: const BorderSide(
                             color: Colors.black45,
-                            width: 2.0,
+                            width: 1.5,
                           ),
                           borderRadius: BorderRadius.circular(6),
                         ),
@@ -66,9 +71,9 @@ class CartScreen extends StatelessWidget {
                       'Order Now',
                       style: TextStyle(
                         color: Colors.white,
-                        fontFamily: 'Lato',
+                        fontFamily: 'Raleway',
                         fontSize: 17,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w400,
                       ),
                     ),
                   )

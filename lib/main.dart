@@ -27,6 +27,11 @@ class MyApp extends StatelessWidget {
           fontFamily: 'Lato',
           appBarTheme: const AppBarTheme(
             backgroundColor: Color.fromRGBO(92, 7, 253, 1.0),
+            titleTextStyle: TextStyle(
+              fontFamily: 'Raleway',
+              fontWeight: FontWeight.w600,
+              fontSize: 20,
+            ),
           ),
         ),
         home: ProductOverviewScreen(),
