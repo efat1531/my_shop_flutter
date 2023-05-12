@@ -16,7 +16,7 @@ class OrderBuilder extends StatelessWidget {
               order.amount.toString(),
             ),
             subtitle: Text(
-              DateFormat('dd MM yyyy hh:mm').format(order.orderDateTime),
+              DateFormat('dd MMM, yyyy hh:mm AA').format(order.orderDateTime),
             ),
             trailing: IconButton(
               icon: Icon(Icons.expand_circle_down_outlined),
