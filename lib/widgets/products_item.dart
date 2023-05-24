@@ -1,6 +1,5 @@
 // ignore_for_file: sort_child_properties_last, prefer_const_constructors, non_constant_identifier_names
 
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../provider/Product_model_provider.dart';

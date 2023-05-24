@@ -27,7 +27,7 @@ class _ProductOverviewScreenState extends State<ProductOverviewScreen> {
         title: _showFavourites?Text('Your Favourites'):Text('All Items'),
         actions: [
           Consumer<Cart>(
-            builder: (context, cart, ch) => Badge(
+            builder: (context, cart, ch) => BadgePre(
               child: ch!,
               color: Color.fromRGBO(255, 114, 67, 1),
               value: cart.itemCount.toString(),
