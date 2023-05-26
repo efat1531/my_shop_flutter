@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../screens/order_screen.dart';
-
+import '../screens/user_product_screen.dart';
 class AppDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -33,6 +33,13 @@ class AppDrawer extends StatelessWidget {
           const Divider(
             thickness: 1.5,
             color: Color.fromRGBO(192, 116, 132, 1),
+          ),
+          ListTile(
+            leading: const Icon(Icons.edit),
+            title: const Text('Products'),
+            onTap: (() {
+              Navigator.of(context).pushReplacementNamed(UserProductScreen.routeName);
+            }),
           ),
         ],
       ),
