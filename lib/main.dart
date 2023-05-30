@@ -9,6 +9,7 @@ import './screens/product_details.dart';
 import './screens/cart_screen.dart';
 import './screens/order_screen.dart';
 import './screens/user_product_screen.dart';
+import './screens/edit_products.dart';
 
 void main() => runApp(MyApp());
 
@@ -28,6 +29,8 @@ class MyApp extends StatelessWidget {
         )
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        // https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Iron_electrolytic_and_1cm3_cube.jpg/1920px-Iron_electrolytic_and_1cm3_cube.jpg
         title: 'MyShop',
         theme: ThemeData(
           fontFamily: 'Lato',
@@ -47,6 +50,7 @@ class MyApp extends StatelessWidget {
           CartScreen.routeName: (context) => CartScreen(),
           OrderScreen.routeName: (context) => OrderScreen(),
           UserProductScreen.routeName: (context) => UserProductScreen(),
+          EditProductScreen.routeName: (context) => EditProductScreen(),
         },
       ),
     );
