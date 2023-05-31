@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../provider/Product_model_provider.dart';
+import '../provider/product_provider.dart';
 
 class EditProductScreen extends StatefulWidget {
   static const routeName = '/products/edit_products';
@@ -13,6 +16,14 @@ class _EditProductScreenState extends State<EditProductScreen> {
   final _descriptionFocusNode = FocusNode();
   final _imageURLController = TextEditingController();
   final _imageUrlFocusNode = FocusNode();
+  final _form = GlobalKey<FormState>();
+  var _newProduct = Product(
+    id: '',
+    title: '',
+    description: '',
+    imageUrl: '',
+    price: 0,
+  );
 
   @override
   void initState() {
@@ -33,11 +44,17 @@ class _EditProductScreenState extends State<EditProductScreen> {
   }
 
   void _updateImageUrl() {
-    if(!_imageUrlFocusNode.hasFocus){
-      setState(() {
-        
-      });
+    if (!_imageUrlFocusNode.hasFocus) {
+      setState(() {});
     }
+  }
+
+  void _saveProduct() {
+    final isValid = _form.currentState!.validate();
+    if (!isValid) return;
+    _form.currentState!.save();
+    Provider.of<ProductProvider>(context, listen: false).add_item(_newProduct);
+    Navigator.of(context).pop();
   }
 
   @override
@@ -45,10 +62,17 @@ class _EditProductScreenState extends State<EditProductScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Edit Products'),
+        actions: [
+          IconButton(
+            onPressed: _saveProduct,
+            icon: const Icon(Icons.save),
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
+          key: _form,
           child: ListView(
             children: [
               TextFormField(
@@ -58,6 +82,21 @@ class _EditProductScreenState extends State<EditProductScreen> {
                 textInputAction: TextInputAction.next,
                 onFieldSubmitted: (value) {
                   FocusScope.of(context).requestFocus(_priceFocus);
+                },
+                onSaved: (newValue) {
+                  _newProduct = Product(
+                    id: _newProduct.id,
+                    title: newValue as String,
+                    description: _newProduct.description,
+                    imageUrl: _newProduct.imageUrl,
+                    price: _newProduct.price,
+                  );
+                },
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Please add a title';
+                  }
+                  return null;
                 },
               ),
               TextFormField(
@@ -69,6 +108,21 @@ class _EditProductScreenState extends State<EditProductScreen> {
                 focusNode: _priceFocus,
                 onFieldSubmitted: (value) {
                   FocusScope.of(context).requestFocus(_descriptionFocusNode);
+                },
+                onSaved: (newValue) {
+                  _newProduct = Product(
+                    id: _newProduct.id,
+                    title: _newProduct.title,
+                    description: _newProduct.description,
+                    imageUrl: _newProduct.imageUrl,
+                    price: int.parse(newValue as String),
+                  );
+                },
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Please add amount of the product';
+                  }
+                  return null;
                 },
               ),
               TextFormField(
@@ -82,6 +136,21 @@ class _EditProductScreenState extends State<EditProductScreen> {
                   FocusScope.of(context).requestFocus(_imageUrlFocusNode);
                 },
                 focusNode: _descriptionFocusNode,
+                onSaved: (newValue) {
+                  _newProduct = Product(
+                    id: _newProduct.id,
+                    title: _newProduct.title,
+                    description: newValue as String,
+                    imageUrl: _newProduct.imageUrl,
+                    price: _newProduct.price,
+                  );
+                },
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Please add description of the product';
+                  }
+                  return null;
+                },
               ),
               Row(
                 children: [
@@ -99,7 +168,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                       ),
                     ),
                     child: _imageURLController.text.isEmpty
-                        ? Text('Enter a URL')
+                        ? const Text('Enter a URL')
                         : Image.network(
                             _imageURLController.text,
                             fit: BoxFit.cover,
@@ -107,11 +176,31 @@ class _EditProductScreenState extends State<EditProductScreen> {
                   ),
                   Expanded(
                     child: TextFormField(
-                      decoration: InputDecoration(labelText: 'Image URL'),
+                      decoration: const InputDecoration(labelText: 'Image URL'),
                       keyboardType: TextInputType.url,
                       textInputAction: TextInputAction.done,
                       controller: _imageURLController,
                       focusNode: _imageUrlFocusNode,
+                      onFieldSubmitted: (value) {
+                        _saveProduct();
+                      },
+                      onSaved: (newValue) {
+                        _newProduct = Product(
+                          id: _newProduct.id,
+                          title: _newProduct.title,
+                          description: _newProduct.description,
+                          imageUrl: newValue as String,
+                          price: _newProduct.price,
+                        );
+                      },
+                      validator: (value) {
+                        if (value!.isEmpty) return 'Please enter a URL';
+                        if (!value.startsWith('http') &&
+                            !value.startsWith('https')) {
+                          return 'Enter a valid URL';
+                        }
+                        return null;
+                      },
                     ),
                   ),
                 ],
