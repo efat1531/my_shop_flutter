@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../provider/product_provider.dart';
 import '../widgets/badge.dart';
 import '../widgets/product_grid_view.dart';
 import '../provider/cart_provider.dart';
@@ -20,11 +21,30 @@ class ProductOverviewScreen extends StatefulWidget {
 
 class _ProductOverviewScreenState extends State<ProductOverviewScreen> {
   bool _showFavourites = false;
+  bool isLoading = false;
+  @override
+  void initState() {
+    // TODO: implement initState
+    setState(() {
+      isLoading = true;
+    });
+    Future.delayed(Duration.zero).then((value) {
+      Provider.of<ProductProvider>(context, listen: false)
+          .fetchProducts()
+          .then((value) {
+        setState(() {
+          isLoading = false;
+        });
+      });
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: _showFavourites?Text('Your Favourites'):Text('All Items'),
+        title: _showFavourites ? Text('Your Favourites') : Text('All Items'),
         actions: [
           Consumer<Cart>(
             builder: (context, cart, ch) => BadgePre(
@@ -68,7 +88,7 @@ class _ProductOverviewScreenState extends State<ProductOverviewScreen> {
         ],
       ),
       drawer: AppDrawer(),
-      body: ProductGridView(_showFavourites),
+      body: isLoading?Center(child: CircularProgressIndicator(),) :ProductGridView(_showFavourites),
     );
   }
 }
