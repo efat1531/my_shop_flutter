@@ -52,36 +52,7 @@ class CartScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  ElevatedButton(
-                    onPressed: () {
-                      Provider.of<Orders>(context,listen: false).addOrder(
-                          cart.items.values.toList(), cart.itemTotlAmount);
-                      cart.delteCart();
-                    },
-                    style: ButtonStyle(
-                      shape: MaterialStateProperty.all(
-                        RoundedRectangleBorder(
-                          side: const BorderSide(
-                            color: Colors.black45,
-                            width: 1.5,
-                          ),
-                          borderRadius: BorderRadius.circular(6),
-                        ),
-                      ),
-                      backgroundColor: MaterialStateProperty.all(
-                        const Color.fromRGBO(238, 108, 77, 1),
-                      ),
-                    ),
-                    child: const Text(
-                      'Order Now',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'Raleway',
-                        fontSize: 17,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  )
+                  addOrderButtonWidget(cart: cart)
                 ],
               ),
             ),
@@ -102,6 +73,62 @@ class CartScreen extends StatelessWidget {
             ),
           )
         ],
+      ),
+    );
+  }
+}
+
+class addOrderButtonWidget extends StatefulWidget {
+  const addOrderButtonWidget({
+    super.key,
+    required this.cart,
+  });
+
+  final Cart cart;
+
+  @override
+  State<addOrderButtonWidget> createState() => _addOrderButtonWidgetState();
+}
+
+class _addOrderButtonWidgetState extends State<addOrderButtonWidget> {
+  var _isLoading = false;
+  @override
+  Widget build(BuildContext context) {
+    final cart = Provider.of<Cart>(context);
+    return ElevatedButton(
+      onPressed: (cart.itemTotlAmount == 0 || _isLoading == true)
+          ? null
+          : () async {
+              setState(() {
+                _isLoading = true;
+              });
+              await Provider.of<Orders>(context, listen: false).addOrder(
+                  widget.cart.items.values.toList(),
+                  widget.cart.itemTotlAmount);
+              widget.cart.delteCart();
+            },
+      style: ButtonStyle(
+        shape: MaterialStateProperty.all(
+          RoundedRectangleBorder(
+            side: const BorderSide(
+              color: Colors.black45,
+              width: 1.5,
+            ),
+            borderRadius: BorderRadius.circular(6),
+          ),
+        ),
+        backgroundColor: MaterialStateProperty.all(
+          const Color.fromRGBO(238, 108, 77, 1),
+        ),
+      ),
+      child: const Text(
+        'Order Now',
+        style: TextStyle(
+          color: Colors.white,
+          fontFamily: 'Raleway',
+          fontSize: 17,
+          fontWeight: FontWeight.w400,
+        ),
       ),
     );
   }

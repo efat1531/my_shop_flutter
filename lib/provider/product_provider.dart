@@ -114,7 +114,6 @@ class ProductProvider with ChangeNotifier {
           imageUrl: receivedProduct.imageUrl,
           price: receivedProduct.price,
           isFavourite: receivedProduct.isFavourite);
-      print(newProduct);
       _items.insert(0, newProduct);
       //notifyListeners();
     } catch (error) {
